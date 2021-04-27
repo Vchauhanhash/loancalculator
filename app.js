@@ -15,8 +15,10 @@ formSubmit.addEventListener('submit',function(e) {
     document.getElementById('results').style.display = 'none';
     //show loader
     document.getElementById('loading').style.display = 'block';
-    setTimeout(calResults,1000);
-
+  setTimeout(function(){ document.getElementById('loading').style.display = 'none';},2000)
+  // document.getElementById('loading').style.display = 'none';
+    //setTimeout(calResults,1000);
+setTimeout(calResults,2000);
     e.preventDefault();
 })
 
@@ -37,20 +39,37 @@ function calResults(){
      if(amount.value==''){
         
          const errText = document.querySelector('.amount-check');
-         errText.appendChild(document.createTextNode('**please Check your ammountinput')) ;
+         errText.innerHTML ="";
+         errText.appendChild(document.createTextNode('**please Check your loan amount ')) ;
      }
-     if(amount.value==''){
+
+     if(isFinite(parseFloat(amount.value))) {
+        document.querySelector('.amount-check').innerHTML="";
+ }
+      if(interest.value==''){
         
         const errText = document.querySelector('.interest-check');
-        errText.appendChild(document.createTextNode('**please Check your interest value')) ;
+        errText.innerHTML ="";
+        errText.appendChild(document.createTextNode('**please Check your interest value')) ; 
     }
-    if(amount.value==''){
+    if(isFinite(parseFloat(interest.value))) {
+        document.querySelector('.interest-check').innerHTML="";
+       
+}
+    
+     if(years.value==''){
         
         const errText = document.querySelector('.years-check');
+        errText.innerHTML ="";
         errText.appendChild(document.createTextNode('**please Check your time-period value')) ;
     }
+    if(isFinite(parseFloat(years.value))) {
+        document.querySelector('.years-check').innerHTML="";
+   
+}
+
       
-    else {
+  if(isFinite(monthlyAmount)) {
         monthlyPayment.value = monthlyAmount.toFixed(2);
         totalPayment.value = (monthlyAmount*nofMonths).toFixed(2);
         totalInterest.value = ((totalPayment.value)-principalAmount).toFixed(2);
@@ -59,33 +78,20 @@ function calResults(){
      //hide loader
      document.getElementById('loading').style.display = 'none';
     
-    }
+
        
 
      // remove amounterr
-       setTimeout(
-        function(){
-            document.querySelector('.amount-check').remove();
-        }   
+    
+     
         
-        ,2000)
+        
         //
-        setTimeout(
-            function(){
-                document.querySelector('.interest-check').remove();
-            }   
+        
             
-            ,2000)
         // 
-         setTimeout(
-            function(){
-                document.querySelector('.years-check').remove();
-            }   
-            
-            ,2000)
-    
+       
+    }    
 
-     }
-
-    
+}
      
